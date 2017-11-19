@@ -1,0 +1,326 @@
+.box{
+  display: block;
+}
+
+
+
+.raw>.card {
+  background: #85E2FF;
+  border-radius: 2px;
+  display: inline-block;
+  height: 80vh;
+  margin: 1rem 3rem;
+  position: relative;
+}
+
+#palmares{
+  border: solid 1px black;
+  margin: 5%;
+  border-radius: 2px;
+  display: inline-block;
+  height: 80vh;
+  margin: 1rem 3rem;
+  position: relative;
+}
+#adversaire{
+  border: solid 1px black;
+  margin: 5%;
+  border-radius: 2px;
+  display: inline-block;
+  height: 80vh;
+  margin: 1rem 3rem;
+  position: relative;
+}
+.popup{
+  display: inline-block;
+  position: absolute;
+  background: white;
+  top: 30px;
+  padding: 2px 5px;
+}
+#recherche{
+  height: 85px;
+  top: 10px;
+  left: 0;
+  margin:10px auto;
+
+  padding: 0;
+  display: inline-block;
+}
+
+#line-recherche{
+  border-radius: 5px;
+}
+
+#poche{
+  height: 4%;
+  background: #85E2FF;
+  position: absolute;
+  box-shadow: 0 -20px 20px 0 #85E2FF;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  overflow: visible;
+}
+.num{
+  color: white;
+  margin: 25px 20px;
+  position: absolute;
+  font-weight: bold;
+  font-size: 24px
+}
+.line-adverse{
+    margin-top: 10px;
+    height: 80px;
+}
+#victoire{
+  color: white;
+  font-size: 58px;
+  font-weight: bold;
+}
+
+.rond{
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  background: #fff;
+  display: inline-block;
+  margin: 20px 15px;
+  box-shadow: 0 0 9px inset;
+}
+.rond1{
+  width: 40%;
+  height: 100%;
+  display: inline-block;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 9px inset;
+}
+.mind{
+  width: 80%;
+  background: #1C2236;
+  height: 100%;
+  float: left;
+  border-radius: 30px 0 0 0px;
+  display: inline-block;
+}
+.mind2{
+  width: 100%;
+  background: #1C2236;
+  height: 85px;
+  float: left;
+  border-radius: 30px 30px 0 0px;
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.hint{
+  width: 20%;
+  background: #EEFF6B;
+  float: left;
+  height: 100%;
+  border-radius: 0 0 30px 0px;
+}
+.btn-val{
+  width: 20%;
+  background: #27B24A;
+  float: left;
+  height: 100%;
+  border-radius: 0 30px 30px 0px;
+
+}
+.btn-val:hover{
+  width: 20%;
+  background: #27B24A;
+  float: left;
+  height: 100%;
+  border-radius: 0 30px 30px 0px;
+  box-shadow: 0 0 14px;
+}
+.btn-val:active{
+  width: 20%;
+  background: #27B24A;
+  float: left;
+  height: 100%;
+  border-radius: 0 30px 30px 0px;
+  box-shadow: 0 0 9px inset;
+}
+
+.hint1{
+  width: 80%;
+  height: 50%;
+  float: left;
+  display: block;
+}
+.hint2{
+  width: 80%;
+  height: 50%;
+  float: right;
+  display: block;
+}
+
+.centrage{
+  margin: 6% auto;
+  width: 80%;
+  height: 80%;
+}
+.black{
+  background: #000;
+}
+.gray{
+  background: gray;
+}
+.rouge{
+  background:#BF0404;
+  box-shadow: 0 0 14px;
+}
+.rouge:hover{
+  background:#fa1e1e;
+  box-shadow: 0 0 14px;
+}
+.rouge:active{
+  background:#fa1e1e;
+  box-shadow: 0 0 9px inset;
+}
+.violet{
+  background: #663399;
+  box-shadow: 0 0 14px;
+}
+.violet:hover{
+  background: #8c53c6;
+  box-shadow: 0 0 14px;
+}
+.violet:active{
+  background: #8c53c6;
+  box-shadow: 0 0 9px inset;
+}
+.vert{
+  background: #40E0D0;
+  box-shadow: 0 0 14px;
+}
+.vert:hover{
+  background: #65e6d9;
+  box-shadow: 0 0 14px;
+}
+.vert:active{
+  background: #40E0D0;
+  box-shadow: 0 0 9px black inset;
+}
+.jaune{
+  background: #FFFF00;
+  box-shadow: 0 0 14px;
+}
+.jaune:hover{
+  background: #ffff4d;
+  box-shadow: 0 0 14px;
+}
+.jaune:active{
+  background: #FFFF00;
+  box-shadow: 0 0 9px inset;
+}
+.bleu{
+  background:#4682B4;
+  box-shadow: 0 0 14px
+}
+.bleu:hover{
+  background:#6c9dc6;
+  box-shadow: 0 0 14px;
+}
+.bleu:active{
+  background:#6c9dc6;
+  box-shadow: 0 0 9px inset;
+}
+.marron{
+  background: #A0522D;
+  box-shadow: 0 0 14px;
+}
+.marron:hover{
+  background: #d28460;
+  box-shadow: 0 0 14px;
+}
+.marron:active{
+  background: #d28460;
+  box-shadow: 0 0 9px inset;
+}
+.card-1 {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.card-1:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+@media (max-width: 1770px) {
+  .rond{
+    width: 35px;
+    height: 35px;
+    margin: 25px 10px;
+  }
+}
+@media (max-width: 1440px) {
+  .rond{
+    width: 32px;
+    height: 32px;
+    margin: 27px 9px;
+  }
+  .raw{
+    display: flex;
+    width: 90%;
+    margin: 20px auto;
+    position: absolute;
+    flex-flow: row wrap;
+    /*flex-direction: column;*/
+    align-items: stretch;
+  }
+  body > div > div > div.fond.col-xs-offset-4.col-md-4.text-center.card{
+    order:1;
+    width: 49%;
+    margin: auto;
+    /*align-self: flex-start;*/
+  }
+  #adversaire{
+    margin: auto;
+    order: 1;
+    width: 49%
+  }
+  #palmares{
+    width: 98%;
+    order: 3;
+    margin: 15px auto;
+
+  }
+}
+
+@media (max-width: 1000px) {
+  .rond{
+    width: 40px;
+    height: 40px;
+    margin: 23px 15px;
+  }
+  .raw{
+    display: flex;
+    /*width: 90%;*/
+    margin: 20px auto;
+    position: absolute;
+    /*flex-flow: row wrap;*/
+    flex-direction: column;
+    align-items: stretch;
+  }
+  body > div > div > div.fond.col-xs-offset-4.col-md-4.text-center.card{
+    order:1;
+    width: 80%;
+    margin: auto;
+  }
+
+  #adversaire{
+    margin: auto;
+    order: 1;
+    width: 80%
+  }
+  #palmares{
+    width: 80%;
+    order: 3;
+    margin: 15px auto;
+  }
+}

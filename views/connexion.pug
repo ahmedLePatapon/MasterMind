@@ -1,0 +1,22 @@
+include haut.pug
+link(rel='stylesheet', href='/src_static/css/form.css')
+html
+  title Connexion
+  body
+    .container
+      .row
+        .col-md-12
+          .wrap
+            p.form-title Connexion
+            form.login(action='/connexion', method='POST')
+              input(type='text', placeholder='Pseudo', name='pseudo')
+              input(type='password', placeholder='Password' name='password')              
+              p.connexion
+                a(href='/inscription') Inscription?
+              input.btn.btn-success.btn-sm(type='submit', value='Sign In')
+              if (habon)
+                .alert.alert-danger
+                  p #{habon}
+              if (msg)
+                .alert.alert-danger
+                  p #{msg}            

@@ -1,0 +1,62 @@
+include haut.pug
+link(rel='stylesheet', href='/src_static/css/animate.css')
+link(rel='stylesheet', href='/src_static/css/jeu.css')
+  
+title MasterMind
+html
+  body
+    .container-fluid
+      .raw
+        p #{avatar}
+        #palmares.col-md-3.col-md-offset-1
+          div
+            img#avatar1  
+            div#cadre
+              .table-responsive
+                table.table
+              div#vic
+                h2 Victoire
+              div#defaite
+                h2 defaite
+              
+        .card.col-md-4
+          #recherche.col-xs-12
+            .mind
+              #boule1.rond.rouge
+              #boule2.rond.vert
+              #boule3.rond.jaune
+              #boule4.rond.bleu
+              #boule5.rond.violet
+              #boule6.rond.marron
+            .btn-val
+              p.validation Valider
+          #poche.col-md-12
+          #champDejeu.col-md-12.boxscroll.do-nicescroll4
+            .line-adverse
+              .mind
+                .num 1
+                .rond.white.choix1
+                .rond.white.choix2
+                .rond.white.choix3
+                .rond.white.choix4
+              .hint
+                .centrage
+                  .hint1
+                    .rond1
+                    .rond1
+                  .hint2
+                    .rond1
+                    .rond1
+        #adversaire.col-md-3.col-md-offset-4.card
+          div
+            .mind2
+              .num 1
+              .rond.white.choix1
+              .rond.white.choix2
+              .rond.white.choix3
+              .rond.white.choix4
+              
+  script(src='https://code.jquery.com/jquery-3.2.1.min.js', integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=', crossorigin='anonymous')
+  script(src='/src_static/js/jquery.nicescroll.min.js')
+  script(src='/src_static/js/script.js')
+  script(src="/socket.io/socket.io.js")

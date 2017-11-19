@@ -1,0 +1,24 @@
+include haut.pug
+link(rel='stylesheet', href='/src_static/css/form.css')
+html
+  title Inscription
+  body
+    p.form-title Inscription
+      .container
+        .row
+          .col-md-12
+            .wrap
+              form.login(action='/inscription', method='POST')
+                input(type='hidden', placeholder='Email', name='email',required="required")#avatar
+                //- input(type='text', placeholder='Nom', name='nom')
+                //- input(type='text', placeholder='Prenom', name='prenom')
+                input(type='text', placeholder='Email', name='email',required="required")#email
+                input(type='text', placeholder='Pseudo', name='pseudo',required="required")
+                input(type='password', placeholder='Password' name='password',required="required")
+                p.connexion                
+                  a(href='/connexion') Connexion?
+                input.btn.btn-success.btn-sm(type='submit', value='Sign In')
+  script(src='https://code.jquery.com/jquery-3.2.1.min.js', integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=', crossorigin='anonymous')
+  script(src='/src_static/js/form.js')
+    
+  

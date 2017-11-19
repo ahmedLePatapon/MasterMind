@@ -1,0 +1,70 @@
+body {
+  background-color: #EEFF6B !important;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+#centre{
+  text-decoration: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 20vh;
+  font-family: 'Voltaire', sans-serif;
+  font-size: 12em;
+  text-shadow:
+  24px -24px 0 rgba(0,0,0,0.8),
+  23px -23px 0 rgba(0,0,0,0.8),
+  22px -22px 0 rgba(0,0,0,0.8),
+  21px -21px 0 rgba(0,0,0,0.8),
+  20px -20px 0 rgba(0,0,0,0.8),
+  19px -19px 0 rgba(0,0,0,0.8),
+  18px -18px 0 rgba(0,0,0,0.8),
+  17px -17px 0 rgba(0,0,0,0.8),
+  16px -16px 0 rgba(0,0,0,0.8),
+  15px -15px 0 rgba(0,0,0,0.8),
+  14px -14px 0 rgba(0,0,0,0.8),
+  13px -13px 0 rgba(0,0,0,0.8),
+  12px -12px 0 rgba(0,0,0,0.8),
+  11px -11px 0 rgba(0,0,0,0.8),
+  10px -10px 0 rgba(0,0,0,0.8),
+  9px -9px 0 rgba(0,0,0,0.8),
+  8px -8px 0 rgba(0,0,0,0.8),
+  7px -7px 0 rgba(0,0,0,0.8),
+  6px -6px 0 rgba(0,0,0,0.8),
+  5px -5px 0 rgba(0,0,0,0.8),
+  4px -4px 0 rgba(0,0,0,0.8),
+  3px -3px 0 rgba(0,0,0,0.8),
+  2px -2px 0 rgba(0,0,0,0.8),
+  1px -1px 0 rgba(0,0,0,0.8);
+  color: gray;
+}
+a:hover{
+
+}
+.name {
+  letter-spacing: 10px;
+  display:flex;
+  margin:auto;
+  padding:0 1rem 1rem;
+  position: relative;
+  &:before {
+    content:'';
+    width:100%;
+    background:#16a085;
+    opacity:0.3;
+    bottom:0;
+    height: 1px;
+    left:0;
+    position:absolute;
+  }
+}
+.letter {
+  display:inline-block;
+  opacity:0;
+  transform:scale(2);
+}
+.letter:hover{
+  color:
+}
