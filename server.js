@@ -8,7 +8,6 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const rand = require('./choixAleatoire');
 const uuidv1 = require('uuid/v1');
-const cool = require('cool-ascii-faces');
 
 app.use('/src_static', Express.static(__dirname + '/src' ));
 
@@ -26,19 +25,6 @@ app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({
   extended: false
 }));
-
-
-
-// views is directory for all template files
-
-app.set('view engine', 'ejs');
-
-
-app.get('/cool', function(request, response) {
-  response.send(cool());
-});
-
-
 
 
 
@@ -80,7 +66,6 @@ app.post('/connexion', function(req,res) {
         pseudo: req.body.pseudo,
         password: req.body.password,
         connected: req.session.connected
-
       })
     }
   });
@@ -101,10 +86,7 @@ app.post('/inscription', function(req, res) {
         status: 1,
         date: new Date()
       }, function(err, result){
-        var rand = Math.round(Math.random() * 9);
         req.session.email = req.body.email;
-        req.session.avatar = 'avatar'+ rand+'';
-        console.log(req.session.avatar);
         req.session.connected = true;
         if(!err && result.insertedCount === 1){
           var title = 'connecté';
@@ -116,10 +98,8 @@ app.post('/inscription', function(req, res) {
         res.render('jeu', {
           pseudo: req.body.pseudo,
           password: req.body.password,
-          connected: req.session.connected,
-          avatar: req.session.avatar
+          connected: req.session.connected
         })
-        console.log(password);
       });
     };
   });
@@ -145,13 +125,7 @@ io.on('connection', function(socket) {
     });
   } else {
     for (var i = 0; i < room.length; i++) {
-      if (io.sockets.adapter.rooms[room[i]] === 'undifined') {
-
-
-      }else {
-
-        var verifRoomDisponible = io.sockets.adapter.rooms[room[i]].length;
-      }
+      var verifRoomDisponible = io.sockets.adapter.rooms[room[i]].length;
       if(verifRoomDisponible === 2) {
         let newRoom = 'room' + room.length;
         room.push(newRoom);

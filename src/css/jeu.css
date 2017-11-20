@@ -141,97 +141,7 @@ html {
   display: inline-block;
   margin-top: 20px;
 }
-#cadre{
-  display: flex;
-  position: absolute;
-  top: 150px;
-  left: 25px;
-  margin: auto;
-  width: 92%;
-}
-#vic{
-  width: 50%;
-  color: inherit;
-  border: 1px solid black;
 
-}
-#defaite{
-  width: 50%;
-  border: 1px solid black;
-}
-img{
-  position: absolute;
-  height: 130px;
-  width: 130px;
-  background: transparent url('/src_static/img/avatar1.png') no-repeat 0 0;
-}
-img:hover, img:active{
-  position: absolute;
-  height: 130px;
-  width: 130px;
-  background: transparent url('/src_static/img/avatar2.png') no-repeat 0 0;
-  cursor: pointer;
-}
-#avatar1{
-  top: 0;
-  left:1.7%;
-  background-position: -35px -29px;
-}
-#avatar2{
-  top: 0;
-  left:18.5%;
-  background-position: -235px -29px;
-}
-#avatar3{
-  top: 0;
-  left:35%;
-  background-position: -435px -29px;
-}
-#avatar4{
-  top: 0;
-  left:51.5%;
-  background-position: -35px -217px;
-}
-#avatar5{
-  top: 0;
-  left:68%;
-  background-position: -235px -217px;
-}
-#avatar6{
-  top: 0;
-  left:84.7%;
-  background-position: -435px -217px;
-}
-#avatar1:hover{
-  top: 0;
-  left:1.7%;
-  background-position: -35px -29px;
-}
-#avatar2:hover{
-  top: 0;
-  left:18.5%;
-  background-position: -235px -29px;
-}
-#avatar3:hover{
-  top: 0;
-  left:35%;
-  background-position: -435px -29px;
-}
-#avatar4:hover{
-  top: 0;
-  left:51.5%;
-  background-position: -35px -217px;
-}
-#avatar5:hover{
-  top: 0;
-  left:68%;
-  background-position: -235px -217px;
-}
-#avatar6:hover{
-  top: 0;
-  left:84.7%;
-  background-position: -435px -217px;
-}
 .hint{
   width: 20%;
   background: #EEFF6B;
@@ -391,20 +301,16 @@ img:hover, img:active{
     /*flex-direction: column;*/
     align-items: stretch;
   }
-  div.card:nth-child(3){
-    width:50%
-  }
-
   body > div > div > div.card.col-xs-offset-4.col-md-4.text-center.card{
     order:1;
-
+    width: 49%;
     margin: auto;
     /*align-self: flex-start;*/
   }
   #adversaire{
     margin: auto;
     order: 1;
-    width: 30%;
+    width: 49%
   }
   #palmares{
     width: 98%;
@@ -429,17 +335,15 @@ img:hover, img:active{
     flex-direction: column;
     align-items: stretch;
   }
-  div.card:nth-child(3){
-    width: 90%;
-    margin: auto;
-    margin-bottom: 30px;
-  }
   body > div > div > div.fond.col-xs-offset-4.col-md-4.text-center.card{
     order:1;
     width: 80%;
     margin: auto;
   }
-
+  #mdr{
+    padding: inherit;
+    margin: 0
+  }
   #adversaire{
     margin: auto;
     order: 1;
