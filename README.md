@@ -16,4 +16,4 @@ FAQ
 
 - Si une deuxieme personne s'est connectée et que vous avez toujours le message "en attente" faites appuyer sur F5
 
-- Si vous avez une page blanche, c'est que le server à du planter. Relancer le server.
+- Si vous avez une page blanche, c'est que le server est down! Relancer le server.
