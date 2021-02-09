@@ -1,3 +1,6 @@
+const { User } = require("../models/Users");
+const { encryptPassword, checkPassword } = require("../utilities");
+
 const accueil = (req, res) => res.render('accueil');
 
 const inscription = (req, res) => res.render('inscription');
@@ -5,65 +8,69 @@ const inscription = (req, res) => res.render('inscription');
 const connexion = (req, res) => res.render('connexion');
 
 const deconnexion = (req, res) => {
-    req.session.connected = false;
-    res.render('connexion');
+    // req.session.connected = false;
+    res.redirect('connexion');
 };
 
-const postInscription = (req, res) => {
-    myDb.collection('users').findOne({email : req.body.email, pseudo: req.body.pseudo}, function(err,data) {    
-        if (data) {
-            console.log(data);
-            var habon ='pseudo ou mail deja existant';
-            res.render('inscription', {habon:habon});
-        } else {
-            myDb.collection('users').insertOne({
-            // nom: req.body.nom,
-            // prenom: req.body.prenom,
-            pseudo: req.body.pseudo,
-            email: req.body.email,
-            password: req.body.password,
-            status: 1,
-            date: new Date()
-            }, function(err, result){
-            req.session.email = req.body.email;
-            req.session.connected = true;
-            if(!err && result.insertedCount === 1){
-                var title = 'connecté';
-                var msg = 'Vous êtes inscrit et connecté';
-            }else{
-                var title = 'inscription';
-                var msg = 'L\'inscription n\'a pas pu se faire';
-            };
-            res.render('jeu', {
-                pseudo: req.body.pseudo,
-                password: req.body.password,
-                connected: req.session.connected
-            })
-            });
-        };
-    });
-};
+const wrongConnexion = (res, msg) => res.render('connexion', {msg});
 
-const postConnexion = (req, res) => {
-    myDb.collection('users').findOne({pseudo: req.body.pseudo, password : req.body.password} || req.session.connected, function(err,data) {
-      if(err || !data) {
-        req.session.connected = false;
-        console.log('pas bon!');
-        var msg = 'Pseudo inéxistant ou mot de passe incorrect. Merci de reéssayer ou bien de vous inscrire pour pouvoir jouer.'
-        res.render('connexion', {msg:msg});
-      } else{
-        req.session.connected = true;
-        console.log(data);
-        var pseudo = data.pseudo || '';
-        var password = data.password || '';
-        var avatar = data.avatar;
-        var bjr = 'Bonjour ' + data.pseudo;
+const postInscription = async (req, res) => {
+    const { email, pseudo, password } = req.body;
+    const user = await User.findOne({email, pseudo});
+
+    if (user !== null) {
+        var habon ='pseudo ou mail deja existant';
+        wrongConnexion(res, habon);
+        // res.render('inscription', {habon:habon});
+        return;
+    }
+
+    let passwordEncrypted = encryptPassword(password);
+
+    const addUser = await new User({
+        pseudo,
+        email,
+        password: passwordEncrypted
+    }).save();
+    if (addUser && addUser.id !== undefined) {
+        var title = 'connecté';
+        // var msg = 'Vous êtes inscrit et connecté';
         res.render('jeu', {
-          pseudo: req.body.pseudo,
-          password: req.body.password,
-          connected: req.session.connected
+            pseudo: req.body.pseudo,
+            password: req.body.password,
+            connected: req.session.connected
         });
-      }
+    }
+};
+
+const postConnexion = async (req, res) => {
+    const { pseudo, password } = req.body;
+    let msg = 'Pseudo inéxistant ou mot de passe incorrect. Merci de reéssayer ou bien de vous inscrire pour pouvoir jouer.';
+    
+    // interrogation de la base de données si l'utilisateur existe
+    const user = await User.findOne({pseudo});
+
+    // si aucun utilisateur trouvé
+    if (user === null) {
+        // req.session.connected = false;
+        console.log('pas bon!');
+        wrongConnexion(req, res, msg);
+        return;
+    }
+
+    // comparaison du passaword recu et de celui encrypté en base 
+    if (!checkPassword(password, user.password)) {
+        wrongConnexion(res, msg);
+        return;
+    }
+
+    // req.session.connected = true;
+    // var avatar = user.avatar;
+    var bjr = 'Bonjour ' + user.pseudo;
+    res.render('jeu', {
+        pseudo,
+        bjr,
+        connected: true
     });
 };
 

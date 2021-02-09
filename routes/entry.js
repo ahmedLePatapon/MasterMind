@@ -11,7 +11,7 @@ router.get('/connexion', connexion);
 
 router.get('/deconnexion', deconnexion);
 
-router.post('/connexion', postConnexion);
+router.post('/jeu', postConnexion);
   
 router.post('/inscription', postInscription);
 
