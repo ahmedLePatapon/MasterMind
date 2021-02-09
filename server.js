@@ -7,6 +7,7 @@ const app = Express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const rand = require('./choixAleatoire');
+const baseRouter = require('./routes');
 const uuidv1 = require('uuid/v1');
 
 app.use('/src_static', Express.static(__dirname + '/src' ));
@@ -20,95 +21,16 @@ app.use(session({
     resave: false
 }));
 
-
 app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({
   extended: false
 }));
 
-
-
-app.get('/', function(req,res) {
-  res.render('accueil');
-});
-
-app.get('/accueil',function(req,res){
-  res.redirect('/');
-});
-
-app.get('/inscription', function(req, res) {
-  res.render('inscription');
-});
-
-app.get('/connexion', function(req,res) {
-  res.render('connexion');
-});
-app.get('/deconnexion', function(req,res) {
-  req.session.connected = false;
-  res.render('connexion')
-})
-
-app.post('/connexion', function(req,res) {
-  myDb.collection('users').findOne({pseudo: req.body.pseudo, password : req.body.password} || req.session.connected, function(err,data) {
-    if(err || !data) {
-      req.session.connected = false;
-      console.log('pas bon!');
-      var msg = 'Pseudo inéxistant ou mot de passe incorrect. Merci de reéssayer ou bien de vous inscrire pour pouvoir jouer.'
-      res.render('connexion', {msg:msg});
-    } else{
-      req.session.connected = true;
-      console.log(data);
-      var pseudo = data.pseudo || '';
-      var password = data.password || '';
-      var avatar = data.avatar;
-      var bjr = 'Bonjour ' + data.pseudo;
-      res.render('jeu', {
-        pseudo: req.body.pseudo,
-        password: req.body.password,
-        connected: req.session.connected
-      })
-    }
-  });
-});
-app.post('/inscription', function(req, res) {
-  myDb.collection('users').findOne({email : req.body.email, pseudo: req.body.pseudo}, function(err,data) {
-    if (data) {
-      console.log(data);
-      var habon ='pseudo ou mail deja existant';
-      res.render('inscription', {habon:habon});
-    } else {
-      myDb.collection('users').insertOne({
-        // nom: req.body.nom,
-        // prenom: req.body.prenom,
-        pseudo: req.body.pseudo,
-        email: req.body.email,
-        password: req.body.password,
-        status: 1,
-        date: new Date()
-      }, function(err, result){
-        req.session.email = req.body.email;
-        req.session.connected = true;
-        if(!err && result.insertedCount === 1){
-          var title = 'connecté';
-          var msg = 'Vous êtes inscrit et connecté';
-        }else{
-          var title = 'inscription';
-          var msg = 'L\'inscription n\'a pas pu se faire';
-        };
-        res.render('jeu', {
-          pseudo: req.body.pseudo,
-          password: req.body.password,
-          connected: req.session.connected
-        })
-      });
-    };
-  });
-});
+app.use('/', baseRouter);
 
 var room = [];
 var jeu = {};
 var joueurs = {};
-
 
 io.on('connection', function(socket) {
   if(room.length === 0) {
@@ -206,8 +128,6 @@ socket.on('coupAdverse',function(data) {
     socket.broadcast.to(joueurs[socket.id]).emit('reFinChoix', data)
   })
 });
-
-
 
 MongoClient.connect(URL, function(err, db) {
   if (err) {
