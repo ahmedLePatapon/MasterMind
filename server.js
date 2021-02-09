@@ -1,19 +1,18 @@
 const Express = require('express');
-const MongoClient = require('mongodb').MongoClient;
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const mongoose = require('mongoose');
 const app = Express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
-const rand = require('./choixAleatoire');
+const { rand } = require('./utilities/choixAleatoire');
 const baseRouter = require('./routes');
-const uuidv1 = require('uuid/v1');
+const { db_user, db_pwd, db_name, port } = require("./config");
 
 app.use('/src_static', Express.static(__dirname + '/src' ));
 
-var URL = 'mongodb://admin:admin@ds111066.mlab.com:11066/mastermind';
-var myDb;
+app.use(cookieParser());
 
 app.use(session({
     secret:'123456789SECRET',
@@ -33,6 +32,7 @@ var jeu = {};
 var joueurs = {};
 
 io.on('connection', function(socket) {
+  console.log(room);
   if(room.length === 0) {
     let newRoom = 'room' + room.length;
     room.push(newRoom);
@@ -47,7 +47,7 @@ io.on('connection', function(socket) {
     });
   } else {
     for (var i = 0; i < room.length; i++) {
-      var verifRoomDisponible = io.sockets.adapter.rooms[room[i]].length;
+      var verifRoomDisponible = io.sockets.adapter && jeu[joueurs[socket.id]] !== undefined && jeu[joueurs[socket.id]].couleurRandom !== undefined && jeu[joueurs[socket.id]].couleurRandom.rooms[room[i]] !== undefined ? jeu[joueurs[socket.id]].couleurRandom.rooms[room[i]].length : '' ;
       if(verifRoomDisponible === 2) {
         let newRoom = 'room' + room.length;
         room.push(newRoom);
@@ -55,39 +55,36 @@ io.on('connection', function(socket) {
         joueurs[socket.id] = newRoom;
         jeu[newRoom] = {};
         jeu[newRoom][socket.id] = {};
-        jeu[newRoom]['joueur1'] = socket.id;
-        socket.on('disconnect', function() {
-          socket.leave(newRoom);
-        });
+        jeu[newRoom].joueur1 = socket.id;
+        socket.on('disconnect', () => socket.leave(newRoom));
         break;
       } else {
         socket.join(room[i]);
         jeu[room[i]][socket.id] = {};
-        jeu[room[i]].couleurRandom = rand.rand();
+        jeu[room[i]].couleurRandom = rand();
         joueurs[socket.id] = room[i];
-        jeu[room[i]]['joueur2'] = socket.id;
+        jeu[room[i]].joueur2 = socket.id;
         socket.emit('attente', false);
-        socket.on('disconnect', function() {
-          socket.leave(room[i]);
-        });
+        socket.on('disconnect', () => socket.leave(room[i]));
         break;
       }
     }
   }
-console.log(jeu[joueurs[socket.id]].couleurRandom);
-// console.log(joueurs[socket.id]);
-// console.log(jeu[joueurs[socket.id]]['joueur2']);
 
-var nbrCoupAdverse = 0;
-var coup = 0;
-socket.on('coup',function(data) {
-  console.log('coup ' + data);
-  coup = data;
-});
-socket.on('coupAdverse',function(data) {
-  console.log('coupadverse ' +data);
-  nbrCoupAdverse = data;
-});
+  // console.log('Couleur à trouvé: ', jeu[joueurs[socket.id]].couleurRandom);
+  // console.log(joueurs[socket.id]);
+  // console.log(jeu[joueurs[socket.id]].joueur2);
+
+  var nbrCoupAdverse = 0;
+  var coup = 0;
+  socket.on('coup',function(data) {
+    console.log('coup ' + data);
+    coup = data;
+  });
+  socket.on('coupAdverse',function(data) {
+    console.log('coupadverse ' +data);
+    nbrCoupAdverse = data;
+  });
 
   //***************** Comparaison des tableaux *************//
   socket.on('verif', function(verif) {
@@ -116,25 +113,31 @@ socket.on('coupAdverse',function(data) {
       }
       return true;
     }
-    compareArray(jeu[joueurs[socket.id]].couleurRandom, verif)
-  })
+    if (jeu[joueurs[socket.id]].couleurRandom !== undefined) {
+      compareArray(jeu[joueurs[socket.id]].couleurRandom, verif);
+    }
+  });
   //***************** fin Comparaison des tableaux *************//
 
-
   socket.on('choixAdverse', function(data) {
-    socket.broadcast.to(joueurs[socket.id]).emit('reChoixAdverse', data)
-  })
+    socket.broadcast.to(joueurs[socket.id]).emit('reChoixAdverse', data);
+  });
   socket.on('finChoix', function(data) {
-    socket.broadcast.to(joueurs[socket.id]).emit('reFinChoix', data)
-  })
+    socket.broadcast.to(joueurs[socket.id]).emit('reFinChoix', data);
+  });
 });
 
-MongoClient.connect(URL, function(err, db) {
-  if (err) {
-    console.log('error');
-  }
-  myDb = db;
-  http.listen(8888, function(socket) {
-    console.log('ecoute sur le port 8888');
-  });
+mongoose.Promise = Promise;
+mongoose
+  .connect(`mongodb+srv://${db_user}:${db_pwd}@mastermind.tjryu.mongodb.net/${db_name}?retryWrites=true&w=majority`, {
+    useCreateIndex: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false
+  })
+  .then(() => console.log('Connection to mongodb Atlas in db : ' + db_name))
+  .catch(err => console.log(new Error(`Connection problem to mongodb : ${err}`)));
+
+http.listen(port, function(socket) {
+  console.log(`Server start at http://localhost:${port}`);
 });

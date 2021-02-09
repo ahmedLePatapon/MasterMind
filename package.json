@@ -4,21 +4,30 @@
   "description": "projet back end",
   "main": "server.js",
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.18.2",
     "cookie-parser": "^1.4.3",
+    "dotenv": "^8.2.0",
     "express": "^4.15.5",
     "express-session": "^1.15.6",
-    "mongodb": "^3.6.4",
-    "pug": "^2.0.0-rc.4",
-    "socket.io": "^2.0.3",
+    "mongoose": "^5.11.15",
+    "nodemon": "^2.0.7",
+    "pug": "^3.0.0",
+    "socket.io": "^3.1.1",
     "uuid": "^3.1.0",
-    "websocket": "^1.0.24"
+    "websocket": "^1.0.33"
   },
   "devDependencies": {},
   "scripts": {
     "test": "mocha",
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "author": "ahmed",
-  "license": "ISC"
+  "license": "ISC",
+  "jshintConfig": {
+      "esversion": "9",
+      "curly": true,
+      "eqeqeq": true,
+      "nocomma": true
+  }
 }
