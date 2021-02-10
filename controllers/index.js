@@ -46,7 +46,7 @@ const postInscription = async (req, res) => {
 const postConnexion = async (req, res) => {
     const { pseudo, password } = req.body;
     let msg = 'Pseudo inéxistant ou mot de passe incorrect. Merci de reéssayer ou bien de vous inscrire pour pouvoir jouer.';
-    
+
     // interrogation de la base de données si l'utilisateur existe
     const user = await User.findOne({pseudo});
 
@@ -54,7 +54,7 @@ const postConnexion = async (req, res) => {
     if (user === null) {
         // req.session.connected = false;
         console.log('pas bon!');
-        wrongConnexion(req, res, msg);
+        wrongConnexion(res, msg);
         return;
     }
 

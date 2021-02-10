@@ -13,16 +13,16 @@ window.addEventListener('DOMContentLoaded', function(){
     document.getElementById('adversaire').children[0].children[0].children[2],
     document.getElementById('adversaire').children[0].children[0].children[3],
     document.getElementById('adversaire').children[0].children[0].children[4]
-  ]
+  ];
   //******** tableau des indices ********//
   var hints = [
     document.getElementById('champDejeu').children[0].children[1].children[0].children[0].children[1],
     document.getElementById('champDejeu').children[0].children[1].children[0].children[1].children[1],
     document.getElementById('champDejeu').children[0].children[1].children[0].children[1].children[0],
     document.getElementById('champDejeu').children[0].children[1].children[0].children[0].children[0]
-  ]
+  ];
   //*********** Tableau à verifier ****************//
-  var verif = []
+  var verif = [];
   var z = 0;
   var divAnimated = [document.getElementById('champDejeu').children[0]];
   var divAdverseAnimated =  [document.getElementById('adversaire').children[0].children[0]];
@@ -30,7 +30,6 @@ window.addEventListener('DOMContentLoaded', function(){
   var id = 2; // numero de ligne
 
   function addRow() {
-
     var div = document.createElement('div');
     $(div).addClass("line-adverse");
     div.innerHTML = '<div class="mind"><div class="num">' + id + '</div><div class="rond white choix1"></div><div class="rond white choix2"></div><div class="rond white choix3"></div><div class="rond white choix4"></div></div><div class="hint"><div class="centrage"><div class="hint1"><div class="rond1 "></div><div class="rond1"></div></div><div class="hint2"><div class="rond1"></div><div class="rond1"></div></div></div></div>';
@@ -39,14 +38,12 @@ window.addEventListener('DOMContentLoaded', function(){
     $('#champDejeu').prepend(div);
     $(div).hide().slideDown('normal');
     id++;
-
     choix = [
       document.getElementById('champDejeu').children[0].children[0].children[1],
       document.getElementById('champDejeu').children[0].children[0].children[2],
       document.getElementById('champDejeu').children[0].children[0].children[3],
       document.getElementById('champDejeu').children[0].children[0].children[4]
     ];
-
     hints = [
       document.getElementById('champDejeu').children[0].children[1].children[0].children[0].children[0],
       document.getElementById('champDejeu').children[0].children[1].children[0].children[0].children[1],
@@ -54,9 +51,9 @@ window.addEventListener('DOMContentLoaded', function(){
       document.getElementById('champDejeu').children[0].children[1].children[0].children[1].children[1]
     ];
 
-    webSocketclient.emit('hints', hints)
+    webSocketclient.emit('hints', hints);
     z = 0;
-  };
+  }
   //********function qui rajoute une ligne de choix.******//
 
 
@@ -80,9 +77,9 @@ window.addEventListener('DOMContentLoaded', function(){
       document.getElementById('adversaire').children[0].children[0].children[2],
       document.getElementById('adversaire').children[0].children[0].children[3],
       document.getElementById('adversaire').children[0].children[0].children[4]
-    ]
+    ];
     z = 0;
-  };
+  }
 
   //******** fin function qui rajoute une ligne de choix adverse.******//
 
@@ -131,7 +128,6 @@ window.addEventListener('DOMContentLoaded', function(){
     this.selected = false;
     this.init = function() {
       this.element.addEventListener('click', this.handleClick.bind(this));
-
     };
 
     this.handleClick = function() {
@@ -146,7 +142,7 @@ window.addEventListener('DOMContentLoaded', function(){
           this.element.classList.toggle(this.color);
           this.selected = !this.selected;
         }
-      }else {
+      } else {
         console.log('Deja selectionné');
       }
     };
@@ -192,18 +188,16 @@ window.addEventListener('DOMContentLoaded', function(){
           boules[i].selected = !boules[i].selected;
         }
       }
-    }else {
+    } else {
       //popup "merci de faire votre choix"
       console.log("terminer vos choix");
     }
-
   });
 
   webSocketclient.on('essaiEncore', function(data) {
     if(data){
       addRow();
-
-    };
+    }
   });
 
 
@@ -212,7 +206,7 @@ window.addEventListener('DOMContentLoaded', function(){
       var addAttente = function() {
         var vic = document.getElementById('adversaire');
         vic.innerHTML = '<div class="mind2"><p class="animated fadeIn infinite" id="victoire">En attente</p></div>';
-      }
+      };
       addAttente();
     }
   });
@@ -220,7 +214,7 @@ window.addEventListener('DOMContentLoaded', function(){
     if (z >= 4) { z = 0; }
       choixAdverse[z].classList.add(data);
       z++;
-  })
+  });
 
   webSocketclient.on('victoire', function(data) {
     if(data) {
@@ -233,7 +227,7 @@ window.addEventListener('DOMContentLoaded', function(){
           timeAdd += 1000;
         }
       }, 100);
-      window.setTimeout(addVictoire, timeAdd)
+      window.setTimeout(addVictoire, timeAdd);
     }
   });
   webSocketclient.on('noir', function(hintNoir) {
@@ -245,7 +239,6 @@ window.addEventListener('DOMContentLoaded', function(){
   });
 
   webSocketclient.on('reFinChoix', function(data) {
-    console.log(data);
     if (data) {
       addRowAdverse();
     }
