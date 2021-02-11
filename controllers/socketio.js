@@ -35,7 +35,6 @@ exports.connection = (io) => {
               socket.join(room[i]);
               jeu[room[i]][socket.id] = {};
               jeu[room[i]].couleurRandom = rand();
-              
               joueurs[socket.id] = room[i];
               jeu[room[i]].joueur2 = socket.id;
               socket.emit('attente', false);
@@ -44,10 +43,6 @@ exports.connection = (io) => {
             }
           }
         }
-        console.log('Couleur à trouvé: ', jeu[joueurs[socket.id]].couleurRandom);
-        console.log(joueurs[socket.id]);
-        console.log(jeu[joueurs[socket.id]].joueur2);
-      
         var nbrCoupAdverse = 0;
         var coup = 0;
         socket.on('coup',function(data) {

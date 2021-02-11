@@ -108,7 +108,7 @@ window.addEventListener('DOMContentLoaded', function(){
   function addVictoire() {
     var vic = document.getElementById('recherche');
     vic.innerHTML = '<div class="mind"><p class="animated jackInTheBox" id="victoire">Victoire</p></div><div class="btn-val" id="rejouer"><p class="validation" >Rejouer</p></div>';
-  };
+  }
   //******** fin function qui rajoute une ligne de victoire *****//
 
 
