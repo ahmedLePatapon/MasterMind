@@ -1,13 +1,10 @@
 require("dotenv").config({ path: "variables.env" });
 
-const db_user = process.env.db_user;
-const db_pwd = process.env.db_pwd;
-const db_name = process.env.db_name;
+const db_name = process.env.db_name || 'Default';
 const port = process.env.PORT || 5000;
-
+const URI = process.env.URI;
 module.exports = {
-    db_user,
-    db_pwd,
-    db_name,
-    port
+    URI,
+    port,
+    db_name
 };

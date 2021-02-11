@@ -3,21 +3,13 @@ const app = require('./app');
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const socketCtrl = require('./controllers/socketio');
-const { db_user, db_pwd, db_name, port } = require("./config");
+const { db_user, URI, db_pwd, db_name, port } = require("./config");
 
-// const serveur = http.Server(app);
-
-var room = [];
-var jeu = {};
-var joueurs = {};
-
-// let Myio = io(serveur);
 socketCtrl.connection(io);
-// Myio.on('connection', socketCtrl.connection);
 
 mongoose.Promise = Promise;
 mongoose
-  .connect(`mongodb+srv://${db_user}:${db_pwd}@mastermind.tjryu.mongodb.net/${db_name}?retryWrites=true&w=majority`, {
+  .connect(URI, {
     useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true,
