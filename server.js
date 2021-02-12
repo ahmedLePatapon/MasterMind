@@ -8,7 +8,7 @@ const { URI, db_name, port } = require("./config");
 socketCtrl.connection(io);
 
 mongoose.Promise = Promise;
-console.log('URI', URI);
+console.log('URI', typeof URI);
 mongoose
   .connect(URI, {
     useCreateIndex: true,
@@ -19,6 +19,6 @@ mongoose
   .then(() => console.log('Connection to mongodb Atlas in db : ' + db_name))
   .catch(err => console.log(new Error(`Connection problem to mongodb : ${err}`)));
 
-http.listen(port, function(socket) {
+http.listen(port, function() {
   console.log(`Server start at http://localhost:${port}`);
 });
