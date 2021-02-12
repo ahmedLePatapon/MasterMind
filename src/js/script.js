@@ -147,7 +147,7 @@ window.addEventListener('DOMContentLoaded', function(){
       }
     };
     this.init();
-  }
+  };
   //************ fin constructeur Boule *************//
 
 
@@ -223,7 +223,7 @@ window.addEventListener('DOMContentLoaded', function(){
       window.setInterval(function() {
         if (i<divAnimated.length - 1) {
           divAnimated[i].style.opacity = 0;
-          i++
+          i++;
           timeAdd += 1000;
         }
       }, 100);

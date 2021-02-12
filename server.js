@@ -3,11 +3,12 @@ const app = require('./app');
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const socketCtrl = require('./controllers/socketio');
-const { db_user, URI, db_pwd, db_name, port } = require("./config");
+const { URI, db_name, port } = require("./config");
 
 socketCtrl.connection(io);
 
 mongoose.Promise = Promise;
+console.log('URI', URI);
 mongoose
   .connect(URI, {
     useCreateIndex: true,

@@ -15,8 +15,6 @@ exports.rand = () => {
 };
 //***** fin fonction choix aleatoire ****//
 
-
-
 exports.compareArray = (a1, a2) => {
   var combienYaDeBoulesBonnesLorsDeLaComparaison = 0;
   var hintNoir = 0;
