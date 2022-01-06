@@ -8,7 +8,6 @@ const { URI, db_name, port } = require("./config");
 socketCtrl.connection(io);
 
 mongoose.Promise = Promise;
-console.log('URI', typeof URI);
 mongoose
   .connect(URI, {
     useCreateIndex: true,

@@ -1,5 +1,4 @@
 const Express = require('express');
-const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const app = Express();
@@ -17,7 +16,7 @@ app.use(session({
 }));
 
 app.set('view engine', 'pug');
-app.use(bodyParser.urlencoded({
+app.use(Express.urlencoded({
   extended: false
 }));
 

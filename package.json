@@ -1,15 +1,19 @@
 {
-  "name": "back",
+  "name": "iubi-cli",
   "version": "0.0.1",
   "description": "projet back end",
   "main": "server.js",
+  "preferGlobal": true,
+  "bin": "./cli.js",
   "dependencies": {
     "bcrypt": "^5.0.0",
     "body-parser": "^1.18.2",
+    "commander": "^7.1.0",
     "cookie-parser": "^1.4.3",
     "dotenv": "^8.2.0",
     "express": "^4.15.5",
     "express-session": "^1.15.6",
+    "inquirer": "^8.0.0",
     "mongoose": "^5.11.15",
     "nodemon": "^2.0.7",
     "pug": "^3.0.0",
@@ -17,7 +21,6 @@
     "uuid": "^3.1.0",
     "websocket": "^1.0.33"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "mocha",
     "start": "nodemon server.js"
@@ -25,9 +28,9 @@
   "author": "ahmed",
   "license": "ISC",
   "jshintConfig": {
-      "esversion": "9",
-      "curly": true,
-      "eqeqeq": true,
-      "nocomma": true
+    "esversion": "9",
+    "curly": true,
+    "eqeqeq": true,
+    "nocomma": true
   }
 }
