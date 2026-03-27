@@ -6,7 +6,7 @@
   "preferGlobal": true,
   "bin": "./cli.js",
   "dependencies": {
-    "bcrypt": "^5.0.0",
+    "bcrypt": "^5.1.1",
     "body-parser": "^1.18.2",
     "commander": "^7.1.0",
     "cookie-parser": "^1.4.3",
@@ -15,7 +15,7 @@
     "express-session": "^1.15.6",
     "inquirer": "^8.0.0",
     "mongoose": "^5.11.15",
-    "nodemon": "^2.0.7",
+    "nodemon": "^3.1.14",
     "pug": "^3.0.0",
     "socket.io": "^3.1.1",
     "uuid": "^3.1.0",
